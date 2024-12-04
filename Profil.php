@@ -19,14 +19,14 @@
 
             <!-- Kontakt Form -->
             <form action="" method="post">
-                <input type="text" name="login" placeholder="login" required />
-                <input type="password" name="pass" placeholder="pass" required />
+                <input type="text" name="Name" placeholder="Name" required />
                 <input type="email" name="email" placeholder="email" required />
                 <input type="tel" name="tel" placeholder="tel"/>
 
                 <input type="submit" value="Abschicken" />
           
             </form>
+            
 
 
             ?>
