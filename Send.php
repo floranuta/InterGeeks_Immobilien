@@ -4,7 +4,7 @@
 
   $Name = $_POST['Name'];
   $email = $_POST['email'];
-  $tel =$_tel['tel'];
+  $tel =$_POST['tel'];
 
   // Umwandlung der erhaltenen Daten
 
@@ -24,17 +24,16 @@
 
   // Daten per E-Mail senden
 
-  if (mail(honcharova.de@gmail.com,
+  if (mail("honcharova.de@gmail.com",
           "Neue Nachricht von InterGeeks_Immobilien",
-          "Name: ".$name."\n".
+          "Name: ".$Name."\n".
           "Email: ".$email."\n".
           "Telefon: ".$tel,
           "From: email@gmail.com \r\n"     )
       ) {
         echo ('E-Mail erfolgreich gesendet');
-        }
-  else {
-        echo ('Es gibt Fehler. Bitte überprüfen Sie die Daten.')
+        } else {
+        echo ('Es gibt Fehler. Bitte überprüfen Sie die Daten.');
   }
 
 

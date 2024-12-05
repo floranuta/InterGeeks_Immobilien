@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
 </head>
-<body>
+<body style="backgraund: transparent;">
     <main class="py-5">
         <div class="container mb-5">
             <header class="mb-5">
@@ -18,7 +18,8 @@
             </header>
 
             <!-- Kontakt Form -->
-            <form action="" method="post">
+            <form action="send.php" method="post" id="KontaktForm">
+                
                 <input type="text" name="Name" placeholder="Name" required />
                 <input type="email" name="email" placeholder="email" required />
                 <input type="tel" name="tel" placeholder="tel"/>
