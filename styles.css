@@ -1,0 +1,89 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0ead2; /* Light beige background from palette */
+    color: #6c584c; /* Dark brown from palette */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #dde5b6; /* Pale green from palette */
+    border-radius: 8px;
+}
+
+/* Title styling */
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #6c584c; /* Dark brown */
+    text-align: center;
+}
+
+/* Grid layout */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Individual favorite item styling */
+.favorite-item {
+    background-color: #adc178; /* Light green from palette */
+    border: 1px solid #a98467; /* Medium brown */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.favorite-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Image styling */
+.item-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #a98467; /* Medium brown */
+}
+
+/* Item details styling */
+.item-details {
+    padding: 15px;
+}
+
+/* Title link styling */
+.item-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #6c584c; /* Dark brown */
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.item-title:hover {
+    color: #a98467; /* Medium brown */
+}
+
+/* Description styling */
+.item-description {
+    font-size: 14px;
+    color: #6c584c; /* Dark brown */
+    margin-bottom: 10px;
+}
+
+/* Price styling */
+.item-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #a98467; /* Medium brown */
+}
