@@ -19,11 +19,15 @@
 
             <!-- Kontakt Form -->
             <form action="" method="post">
+                <label>
                 <input type="text" name="Name" placeholder="Name" required />
                 <input type="email" name="email" placeholder="email" required />
                 <input type="tel" name="tel" placeholder="tel"/>
-
-                <input type="submit" value="Abschicken" />
+                <textarea name="RESULT_TextArea-5" class="text_field" rows="7" cols="50"></textarea>
+                <!--<npuit type="text" name="Nachricht" placeholder="Schreiben Sie bitte Ihre Nachricht" required />-->
+                
+                <label for="captcha">
+                <input type="submit" name="Submit" value="Submit" class="submit_button" id="KSsubmit" disabled=""> <!-- zunächst deaktiviert -->
           
             </form>
             

@@ -4,22 +4,22 @@
 
   $Name = $_POST['Name'];
   $email = $_POST['email'];
-  $tel =$_POST['tel'];
+  $telefon =$_POST['telefon'];
 
   // Umwandlung der erhaltenen Daten
 
   $Name = htmlspecialchars($Name);  // Umwandlung von Zeichen in Entitäten
   $email = htmlspecialchars($email);
-  $tel = htmlspecialchars($tel);
+  $telefon = htmlspecialchars($telefon);
 
 
   $Name = urldecode($Name);   // Dekodierung URL
   $email = urldecode($email);
-  $tel = urldecode($tel);
+  $telefon = urldecode($telefon);
 
   $Name = trim($Name);    // Entfernen von Leerzeichen an beiden Enden
   $email = trim($email);
-  $tel = trim($tel);
+  $telefon = trim($telefon);
 
 
   // Daten per E-Mail senden
@@ -28,7 +28,7 @@
           "Neue Nachricht von InterGeeks_Immobilien",
           "Name: ".$Name."\n".
           "Email: ".$email."\n".
-          "Telefon: ".$tel,
+          "Telefon: ".$telefon,
           "From: email@gmail.com \r\n"     )
       ) {
         echo ('E-Mail erfolgreich gesendet');
