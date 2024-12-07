@@ -8,7 +8,10 @@
 </head>
 <body>
 <?php include 'header.php'; ?>
-
+<?php
+include 'database.php'; // Если файл отсутствует, код продолжит выполняться
+ConnectDB();
+?>
 <main>
     <div class="rectangle">
         <div class="large">
