@@ -1,9 +1,18 @@
 let currentImageIndex = 0;
-const images = [
+/*const images = [
     "img/Wohnung9/Build2.jpg",
     "img/Wohnung9/Build3.jpg",
     "img/Wohnung9/Build1.jpg"
-];
+];*/
+
+document.addEventListener("DOMContentLoaded", function() {
+    const heartIcon = document.getElementById("heart-icon");
+    if (isFavorite) {
+        heartIcon.src = "img/heart_marked.svg"; // Change to the marked heart icon
+    } else {
+        heartIcon.src = "img/heart_unmarked.svg"; // Change to the unmarked heart icon
+    }
+});
 
 function copyLink() {
     const url = window.location.href;

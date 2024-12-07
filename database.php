@@ -52,7 +52,7 @@ function getBeschreibung($conn, $wohnungId){
 }
 function getBilder($conn, $wohnungId){
     $Bilder = [];
-    $query="SELECT * FROM bilder WHERE WohnungId = $wohnungId";
+    $query="SELECT * FROM bilder WHERE WohnungId = $wohnungId ORDER BY  Hauptbild desc";
     $result = $conn->query($query);
     if($result->num_rows > 0) {
       while($row =$result->fetch_assoc()) {

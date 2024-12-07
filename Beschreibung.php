@@ -11,7 +11,7 @@
 <?php include 'header.php'; ?>
 
 <?php
-include 'database.php'; // Если файл отсутствует, код продолжит выполняться
+include 'database.php'; 
 $conn = ConnectDB();
 //$user_id = $_SESSION['user_id'];
 $user_id = 1;
@@ -20,20 +20,26 @@ if(isset($_GET['wohnungId']))
 {
     $wohnungId=$_GET['wohnungId'];
     }
-$isFavorit = isFavorite($conn, $user_id, $wohnungId);
-$Beschreibung = getBeschreibung($conn, $wohnungId);
-$Bilder = getBilder($conn, $wohnungId);
+$isFavorit = isFavorite($conn, $user_id, $wohnungId); //true or false
+$Beschreibung = getBeschreibung($conn, $wohnungId); //array of fields of the apartment
+$Bilder = getBilder($conn, $wohnungId); //array of images
 ?>
+<!-- Embed PHP variables into JavaScript -->
+<script>
+    const images = <?php echo json_encode($Bilder); ?>;
+    const isFavorite = <?php echo json_encode($isFavorit); ?>;
+</script>
+<script src="beschreibung.js"></script>
 <main>
     <div class="rectangle">
         <div class="large">
-            <img src="img/Wohnung9/Build2.jpg" alt="Image 1" onclick="openModal(0)">
+            <img src="<?php echo $Bilder[0]; ?>" alt="Image 1" onclick="openModal(0)">
         </div>
         <div class="small-top">
-            <img src="img/Wohnung9/Build3.jpg" alt="Image 2" onclick="openModal(1)">
+            <img src="<?php echo $Bilder[1]; ?>" alt="Image 2" onclick="openModal(1)">
         </div>
         <div class="small-bottom">
-            <img src="img/Wohnung9/Build1.jpg" alt="Image 3" onclick="openModal(2)">
+            <img src="<?php echo $Bilder[2]; ?>" alt="Image 3" onclick="openModal(2)">
         </div>
     </div>
     <div class="button-container">
@@ -41,7 +47,7 @@ $Bilder = getBilder($conn, $wohnungId);
             <img src="img/clipboard.svg" alt="Copy link icon" class="svg-icon">
         </button>
         <button type="button" aria-label="Add to Favourites" class="btn2" onclick="anotherAction()">
-            <img src="img/heart_unmarked.svg" alt="Another action icon" class="svg-icon">
+            <img id="heart-icon" src="img/heart_unmarked.svg" alt="Another action icon" class="svg-icon">
         </button>
         <button type="button" aria-label="Print page" class="btn3" onclick="printPage()">
             <img src="img/print.svg" alt="Print page icon" class="svg-icon">
@@ -68,13 +74,9 @@ $Bilder = getBilder($conn, $wohnungId);
     </div>
 </div>
 
-<section>
-    <?php
-    echo "This is Beschreibung page";
-    ?>
-</section>
 
-<script src="beschreibung.js"></script>
+
+
 
 <?php include 'footer.php'; ?>
 </body>
