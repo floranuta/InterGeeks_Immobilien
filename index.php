@@ -101,7 +101,7 @@ $conn=new mysqli($host,$username,$password,$database);
                
               
                echo '<div class="appartment-info">';
-               echo '<a href="details.php?wohnungId='.$row['wohnungId'].'"class="titel" target="blank"><h2>'.$row['titel'].'</h2></a>';
+               echo '<a href="Beschreibung.php?wohnungId='.$row['wohnungId'].'"class="titel" target="blank"><h2>'.$row['titel'].'</h2></a>';
                echo '<a href="'.$adress_url.'" target="blank" class="adresse">'.$row['postleitzahl'].' '.$row['stadt'].', '.$row['adresse'].'</a>';
                echo '<div class="wohnfläche info-item">';
                echo '<p >Wohnfläche</p>';
