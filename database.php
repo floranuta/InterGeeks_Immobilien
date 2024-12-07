@@ -16,13 +16,18 @@ else {
 }
 function isFavorite($conn, $user_id, $wohnungId){
     $Favoriten = [];
-    $query="SELECT WohnungId FROM favoriten WHERE UserId = $user_id";
+    $query="SELECT WohnungId FROM favoriten WHERE NutzerId = $user_id";
     $result = $conn->query($query);
+    if ($result === false) {
+        // Обработка ошибки
+        echo "<script>console.log('{$conn->error}');</script>" ;
+    } else {
     if($result->num_rows > 0) {
       while($row =$result->fetch_assoc()) {
         array_push($Favoriten, $row['WohnungId']);
         echo   "<script>console.log('{$row['WohnungId']}');</script>";
       }
+    }
     }
     $isFavorit = false;
     if(in_array($wohnungId, $Favoriten)){
@@ -36,7 +41,7 @@ function isFavorite($conn, $user_id, $wohnungId){
 }
 function getBeschreibung($conn, $wohnungId){
     $Beschreibung = [];
-    $query="SELECT * FROM wohnung WHERE WohnungId = $wohnungId";
+    $query="SELECT * FROM wohnungen WHERE WohnungId = $wohnungId";
     $result = $conn->query($query);
     if($result->num_rows > 0) {
       while($row =$result->fetch_assoc()) {
@@ -51,7 +56,7 @@ function getBilder($conn, $wohnungId){
     $result = $conn->query($query);
     if($result->num_rows > 0) {
       while($row =$result->fetch_assoc()) {
-        array_push($Bilder, $row['Bild']);
+        array_push($Bilder, $row['BildLink']);
       }
     }
     return $Bilder;
