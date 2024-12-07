@@ -1,0 +1,142 @@
+/* General Reset */
+* {
+    margin: 1px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F7F9FC; /* Background color: Pastel gray */
+    color: #333333; /* Main text color: Dark gray */
+}
+
+/* Header styling */
+.header {
+    display: grid;
+    grid-template-rows: auto auto; /* Two rows: top row and navigation */
+    grid-template-columns: 1fr 2fr 1fr; /* Three columns: logo, search, anmelden */
+    align-items: center; /* Vertically center content in grid areas */
+    background-color: #FFFFFF; /* Background color: White */
+    padding: 10px;
+    border-bottom: 2px solid #DDDDDD; /* Border color for header */
+}
+
+/* Logo Container */
+.logo_container {
+    grid-column: 1 / 2; /* First column */
+    display: grid;
+    justify-items: start; /* Vertically and horizontally center the logo within its grid cell */
+    padding: 0; /* Remove any padding */
+}
+
+.logo {
+    max-height: 200px; /* 5 times bigger logo */
+    max-width: auto; /* Keep aspect ratio */
+    margin-left: 0; /* Ensure no left margin */
+}
+
+/* Search Bar */
+.search {
+    grid-column: 2 / 3; /* Center column */
+    text-align: center;
+}
+
+.search-form {
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+}
+
+.search-form input {
+    padding: 5px;
+    width: 70%;
+    border: 1px solid #DDDDDD; /* Border color: Light gray */
+    border-radius: 5px 0 0 5px;
+}
+
+.search-form button {
+    padding: 5px 10px;
+    background-color: #FFCC00; /* Button color: Hauptgelb */
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #E6B800; /* Hover color: Gelb */
+}
+
+/* Anmelden Button */
+.anmelden {
+    grid-column: 3 / 4; /* Last column */
+    text-align: right;
+}
+
+.anmelden .icon {
+    max-height: 40px;
+    margin-right: 10px;
+}
+
+.button {
+    padding: 5px 10px;
+    background-color: #FFCC00; /* Button color: Hauptgelb */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #E6B800; /* Hover color: Gelb */
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    grid-column: 1 / 4; /* Span all three columns */
+    grid-row: 2 / 3; /* Place in the second row */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.nav-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FFCC00; /* Button color: Hauptgelb */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+    background-color: #E6B800; /* Hover color: Gelb */
+}
+
+/* Clearfix to prevent overlap */
+.header::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+    .header {
+        grid-template-columns: 1fr; /* Stack items */
+        grid-template-rows: auto auto auto auto; /* Separate rows for each section */
+        text-align: center;
+    }
+
+    .nav-buttons {
+        flex-wrap: wrap;
+    }
+
+    .nav-buttons button {
+        width: 100%;
+    }
+}
