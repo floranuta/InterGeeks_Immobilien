@@ -7,10 +7,22 @@
     <link rel="stylesheet" href="beschreibung.css">
 </head>
 <body>
+
 <?php include 'header.php'; ?>
+
 <?php
 include 'database.php'; // Если файл отсутствует, код продолжит выполняться
-ConnectDB();
+$conn = ConnectDB();
+//$user_id = $_SESSION['user_id'];
+$user_id = 1;
+$wohnungId = 1;
+if(isset($_GET['wohnungId']))
+{
+    $wohnungId=$_GET['wohnungId'];
+    }
+$isFavorit = isFavorite($conn, $user_id, $wohnungId);
+$Beschreibung = getBeschreibung($conn, $wohnungId);
+$Bilder = getBilder($conn, $wohnungId);
 ?>
 <main>
     <div class="rectangle">
