@@ -9,8 +9,6 @@ if ($conn->connect_error) {
  die("Verbindung fehlgeschlagen: ".$conn->connect_error) ; 
 }
 else {
-    $message = "Erforglich verbunden";
-    echo "<script>console.log('{$message}');</script>";
     return $conn;
 }
 }

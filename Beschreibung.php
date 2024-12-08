@@ -27,7 +27,9 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
 <!-- Embed PHP variables into JavaScript -->
 <script>
     const images = <?php echo json_encode($Bilder); ?>;
-    const isFavorite = <?php echo json_encode($isFavorit); ?>;
+    let isFavorite = <?php echo json_encode($isFavorit); ?>;
+    const NutzerId = <?php echo json_encode($user_id); ?>;
+    const WohnungId = <?php echo json_encode($wohnungId); ?>;
 </script>
 <script src="beschreibung.js"></script>
 <main>

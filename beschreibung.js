@@ -1,9 +1,5 @@
 let currentImageIndex = 0;
-/*const images = [
-    "img/Wohnung9/Build2.jpg",
-    "img/Wohnung9/Build3.jpg",
-    "img/Wohnung9/Build1.jpg"
-];*/
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const heartIcon = document.getElementById("heart-icon");
@@ -12,7 +8,69 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         heartIcon.src = "img/heart_unmarked.svg"; // Change to the unmarked heart icon
     }
+    //heartIcon.addEventListener("click", anotherAction);
 });
+function addFavorite() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "add_favorite.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    console.log(xhr.responseText);
+                    response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if (response.success) {
+                        document.getElementById("heart-icon").src = "img/heart_marked.svg";
+                        console.log("Favorite added successfully");
+                    } else {
+                        console.error("Failed to add favorite:", response.error);
+                    }
+                } catch (e) {
+                    console.error("Invalid JSON response:", xhr.responseText);
+                    console.error("Error name:", e.name);
+                    console.error("Error message:", e.message);
+                }
+            } else {
+                console.error("Request failed with status:", xhr.status);
+            }
+        }
+    };
+    console.log(`NutzerId=${NutzerId}&WohnungId=${WohnungId}`);
+    xhr.send(`NutzerId=${NutzerId}&WohnungId=${WohnungId}`);
+}
+
+function removeFavorite() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "delete_favorite.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    console.log(xhr.responseText);
+                    response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if (response.success) {
+                        document.getElementById("heart-icon").src = "img/heart_unmarked.svg";
+                        console.log("Favorite removed successfully");
+                    } else {
+                        console.error("Failed to remove favorite:", response.error);
+                    }
+                } catch (e) {
+                    console.error("Invalid JSON response:", xhr.responseText);
+                    console.error("Error name:", e.name);
+                    console.error("Error message:", e.message);
+                }
+            } else {
+                console.error("Request failed with status:", xhr.status);
+            }
+        }
+    };
+    console.log(`NutzerId=${NutzerId}&WohnungId=${WohnungId}`);
+    xhr.send(`NutzerId=${NutzerId}&WohnungId=${WohnungId}`);
+}
 
 function copyLink() {
     const url = window.location.href;
@@ -30,8 +88,15 @@ function showCustomModal() {
     }, 3000); // Hide the modal after 3 seconds
 }
 function anotherAction() {
-    // Add your JavaScript code for the second button action here
-    alert('Another action triggered');
+    if (isFavorite) {
+        removeFavorite();
+        isFavorite = false;
+        console.log("isFavorite: ", isFavorite);
+    } else {
+        addFavorite();
+        isFavorite = true;
+        console.log("isFavorite: ", isFavorite);
+    }
 }
 
 function printPage() {
