@@ -1,8 +1,10 @@
 
 <?php
-// include Datenbankverbindung
-include 'php/db_verbindung.php';
+include 'php/db_verbindung.php'; // include Datenbankverbindung
+include 'php/search.php'; //search menu
 ?>
+
+<script src='js/favorite.js' > </script> <!-- toggle the heart -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,9 +28,7 @@ include 'php/db_verbindung.php';
             <input type="text" id="query" name="query" placeholder="Search..." required>
             <button type="submit">Search</button>
         </form>
-        <?php
-            include 'php/search.php';
-        ?>
+        
         <!-- Navigation Buttons -->
         <nav class="nav-buttons">
             <button onclick="location.href='home.html'">Home</button>
@@ -43,8 +43,8 @@ include 'php/db_verbindung.php';
         <span class="favorite-icon" onclick="toggleFavorite()">♡</span>
         <button class="sign-in-button" onclick="location.href='login.html'">Anmelden</button>
     </div>
+    
 </header>
-
     
 </body>
 </html>
