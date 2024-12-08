@@ -1,3 +1,4 @@
+
 <?php
 // include Datenbankverbindung
 include 'php/db_verbindung.php';
@@ -8,50 +9,42 @@ include 'php/db_verbindung.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
-    <!--<link rel='stylesheet' href=css/logo.css>-->
-    <!--<link rel='stylesheet' href=css/search.css>-->
-    <!--<link rel='stylesheet' href=css/anmeldung.css>-->
+    <title>Document</title>
     <link rel='stylesheet' href=css/header.css>
 </head>
-<body> 
-    <header>
-        <div class='logo_container'>        
-            <!--<h1 calss='site_name'>Intergeeks Immobilien</h1>-->
-            <img src='img/wohnung_logo.jpg' alt='Website Logo' class='logo'>
-        </div>
-        <div class='search'>
-            <form class='search-form' action='php/search.php' method='post'>
-                <input type='text' id="query" name='query' placeholder='Stadt...' required>
-                <button type='submit'>search</button>
-            </form>
-            <?php
-                include 'php/search.php';
-            ?>            
-        </div>
-        
-        <div class='anmelden'>
-            <!--<img src='img/anmeldung.png' alt='Anmelen hier' class='icon'>-->            
-            <a href="https://www.example.com" class="button-link">
-                <button class="button" onclick="navigateTo('Anmelden')">Anmelen</button>
-            </a>
-        </div>
-         
-        <div>
-            <nav class="nav-buttons">                
-                <a href="https://www.example.com" class="button-link">
-                    <button class="button" onclick="navigateTo('home')">Home</button>
-                </a>
-                
-                <a href="https://www.example.com" class="button-link">
-                    <button class="button" onclick="navigateTo('about-us')">About Us</button>
-                </a>
-                
-                <a href="https://www.example.com" class="button-link">
-                    <button class="button" onclick="navigateTo('contact')">Contact</button>
-                </a>
-            </nav>
-        </div>     
-    </header>  
+<body>  
+<header class="header">
+    <!-- Column 1: Logo -->
+    <div class="logo-container">
+        <img src="img/wohnung_logo.jpg" alt="Logo" class="logo">
+    </div>
+
+    <!-- Column 2-3: Search Bar and Navigation Buttons -->
+    <div class="search-nav-container">
+        <!-- Search Bar -->
+        <form class="search-form" action="php/search.php" method="post">
+            <input type="text" id="query" name="query" placeholder="Search..." required>
+            <button type="submit">Search</button>
+        </form>
+        <?php
+            include 'php/search.php';
+        ?>
+        <!-- Navigation Buttons -->
+        <nav class="nav-buttons">
+            <button onclick="location.href='home.html'">Home</button>
+            <button onclick="location.href='about.html'">About Us</button>
+            <button onclick="location.href='contact.html'">Contact</button>
+            <button onclick="location.href='services.html'">Services</button>
+        </nav>
+    </div>
+
+    <!-- Column 4: Favorite Button and Anmeldung -->
+    <div class="auth-container">
+        <span class="favorite-icon" onclick="toggleFavorite()">♡</span>
+        <button class="sign-in-button" onclick="location.href='login.html'">Anmelden</button>
+    </div>
+</header>
+
+    
 </body>
 </html>

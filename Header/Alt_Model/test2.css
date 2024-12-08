@@ -1,0 +1,135 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F7F9FC; /* Pastellgrau */
+    color: #333333; /* Dark gray text */
+}
+
+/* Header styling */
+.header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; /* Three columns: logo, search/nav, sign-in */
+    align-items: center;
+    padding: 10px 70px; /* 70px margin from window frame */
+    background-color: #FFFFFF; /* White background */
+    border-bottom: 2px solid #DDDDDD; /* Light gray border */
+}
+
+/* Logo Container */
+.logo-container {
+    text-align: left;
+}
+
+.logo {
+    max-height: 200px;
+}
+
+/* Search and Navigation Container */
+.search-nav-container {
+    text-align: center;
+}
+
+/* Search Bar Styling */
+.search-form {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.search-form input {
+    padding: 5px;
+    width: 70%;
+    border: 1px solid #DDDDDD; /* Light gray border */
+    border-radius: 5px 0 0 5px;
+}
+
+.search-form button {
+    padding: 5px 10px;
+    background-color: #FFCC00; /* Hauptgelb */
+    color: #333333; /* Dark gray text */
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #E6B800; /* Hover Gelb */
+}
+
+/* Navigation Buttons Styling */
+.nav-buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FFCC00; /* Hauptgelb */
+    color: #333333; /* Dark gray text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+    background-color: #E6B800; /* Hover Gelb */
+}
+
+/* Sign-In Button Styling */
+.sign-in-container {
+    text-align: right;
+}
+
+.sign-in-button {
+    padding: 10px 20px;
+    background-color: #28a745; /* Green for Sign In */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sign-in-button:hover {
+    background-color: #218838; /* Darker green for hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        grid-template-columns: 1fr; /* Stack columns */
+        text-align: center;
+    }
+
+    .search-nav-container {
+        margin: 10px 0;
+    }
+}
+
+/* Sign-In and Favorite Icon Container */
+.sign-in-container {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between button and icon */
+}
+
+/* Favorite Icon */
+.favorite-icon {
+    font-size: 20px; /* Adjust size of the heart */
+    color: #FFCC00; /* Hauptgelb */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favorite-icon:hover {
+    color: #E6B800; /* Hover Gelb */
+}
