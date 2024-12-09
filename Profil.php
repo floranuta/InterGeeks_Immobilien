@@ -14,10 +14,11 @@
 <body>
 
   <!-- require_once "header.php"; -->
-  <?php require "DB.php"; 
+  <?php 
 
         session_start();
-
+        require "DB.php";  // connection zur DB
+      
       // Prüfung authorization
         if (!isset($_SESSION['user_id'])) {
           // wenn nicht autorisiert -> start seite
@@ -31,8 +32,7 @@
 
   
   <div class="card-header">
-                <h2>Willkommen in Ihrem Profil</h2>
-            
+            <h2>Willkommen in Ihrem Profil</h2>
             <div class="card-body">
                 <h2> <?php echo $name; ?>!</h2>
                 <p>Ihr Email: <?php echo $email; ?></p>
@@ -41,14 +41,7 @@
 
   </div>
 
-  <?php
-      session_start();
-      session_unset();
-      session_destroy();
-
-      header("Location: login.php");
-      exit;
-  ?>
+  
 
 </body>
 
