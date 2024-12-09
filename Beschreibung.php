@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple PHP Page new</title>
+    <title>Beschreibung</title>
     <link rel="stylesheet" href="beschreibung.css">
 </head>
 <body>
@@ -55,30 +55,60 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
             <img src="img/print.svg" alt="Print page icon" class="svg-icon">
         </button>
     </div>
-</main>
+<div class="content-wrapper">
+        <div class="container">
+            <!-- Title -->
+            <h1>Wohnung zur Miete</h1>
 
-<!-- Modal Structure -->
-<div id="myModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="img01">
-    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
-    <a class="next" onclick="changeImage(1)">&#10095;</a>
-</div>
+            <!-- Price Section -->
+            <div class="price-section">
+                <p>549€ Kaltmiete zzg Nebenkosten 100€</p>
+                <p>Kaution 1000€</p>
+            </div>
 
-<!-- Custom Modal Structure -->
-<div id="customModal">
-    <div class="content">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle">
-            <path d="M9 11l3 3L22 4"></path>
-            <path d="M22 12a10 10 0 1 1-10-10"></path>
-        </svg>
-        <p>Der Link wurde in der Zwischenablage gespeichert</p>
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="feature"><strong>3</strong> Zimmer</div>
+                <div class="feature"><strong>53,5</strong> Wohnfläche</div>
+                <div class="feature"><strong>3.</strong> Geschoss</div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="address-section">
+                <h2>Adresse</h2>
+            </div>
+
+            <!-- Description Section -->
+            <div class="description-section">
+                <h3>Objektbeschreibung</h3>
+                <p>Hohe Altbauwohnung, sehr nette Hausbewohner, bunt gemischt: Senioren, Singles, Paare, WGs</p>
+
+                <h3>Raumaufteilung</h3>
+                <p>Helle, hohe Räume, 3 Zimmer, Große Küche mit Einbauküche, großes Bad mit Fenster и Dusche, viel Platz für Waschmaschine und Trockner, Gäste-WC, große Flur - alles neu saniert, Holzdielen, Fenster neu, teils fest eingebaute Insektenschutzgitter, Kellerraum mit festem Regal.</p>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="contact-header">
+                <div class="profile-pic">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+</svg>
+                </div>
+                <h3>Henri Müller</h3>
+            </div>
+            <div class="contact-info">
+                <button>Email</button>
+            <div class="contact-info">
+                <button>Telefonnummer</button>
+                </div>   
+            </div>
+        </div>
     </div>
-</div>
-
-
-
-
+    
+</main>
 
 <?php include 'footer.php'; ?>
 </body>
