@@ -1,6 +1,6 @@
 <?php 
-
-include 'db_verbindung.php';// include Datenbankverbindung
+// include Datenbankverbindung
+include 'db_verbindung.php';
 
 
 if (isset($_POST['query']) && !empty($_POST['query'])) {
