@@ -1,0 +1,23 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.items {
+    background: #A98467;
+    border-radius: 10px;
+}
+
+.items-hover {
+    filter: grayscale(75%);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.items:nth-child(even) {
+    background: #A98467;
+}
+
+.items:nth-child(odd) {
+    background: #000000;
+}

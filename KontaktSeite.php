@@ -21,12 +21,12 @@
             <!-- Kontakt Form -->
             <div class="kontaktform-container">
 
-                <form action="send.php" method="post" id="KontaktForm">
+                <form method="POST" action="KSSend.php" id="KontaktForm">
                     
                     <input type="text" name="Name" placeholder="Name" required />
-                    <input type="email" name="email" placeholder="email" required />
-                    <input type="telefon" name="telefon" placeholder="telefon"/>
-                    <textarea name="RESULT_TextArea-5" class="text_field" rows="7" cols="50"></textarea>
+                    <input type="email" name="email" placeholder="Email" required />
+                    <input type="telefon" name="telefon" placeholder="Telefon"/>
+                    <textarea name="nachricht" class="text_field" rows="7" cols="50"></textarea>
                 <!--<npuit type="text" name="Nachricht" placeholder="Schreiben Sie bitte Ihre Nachricht" required />-->
 
                     <!-- Captcha-->
