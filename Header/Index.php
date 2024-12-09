@@ -1,50 +1,43 @@
-
 <?php
 include 'php/db_verbindung.php'; // include Datenbankverbindung
-include 'php/search.php'; //search menu
 ?>
-
-<script src='js/favorite.js' > </script> <!-- toggle the heart -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel='stylesheet' href=css/header.css>
+    <title>Responsive Header with CSS Grid</title>
+    <link rel="stylesheet" href="css/header.css">
 </head>
-<body>  
+<body>
 <header class="header">
     <!-- Column 1: Logo -->
     <div class="logo-container">
-        <img src="img/wohnung_logo.jpg" alt="Logo" class="logo">
+        <div class='logo-circle'>
+            <img src="img/wohnung_logo.jpg" alt="Website Logo" class="logo">
+        </div>
     </div>
 
-    <!-- Column 2-3: Search Bar and Navigation Buttons -->
-    <div class="search-nav-container">
-        <!-- Search Bar -->
-        <form class="search-form" action="php/search.php" method="post">
-            <input type="text" id="query" name="query" placeholder="Search..." required>
-            <button type="submit">Search</button>
-        </form>
-        
-        <!-- Navigation Buttons -->
-        <nav class="nav-buttons">
-            <button onclick="location.href='home.html'">Home</button>
-            <button onclick="location.href='about.html'">About Us</button>
-            <button onclick="location.href='contact.html'">Contact</button>
-            <button onclick="location.href='services.html'">Services</button>
-        </nav>
-    </div>
+    <!-- Column 2: Navigation Buttons -->
+    <nav class="nav-buttons">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
 
-    <!-- Column 4: Favorite Button and Anmeldung -->
-    <div class="auth-container">
-        <span class="favorite-icon" onclick="toggleFavorite()">♡</span>
-        <button class="sign-in-button" onclick="location.href='login.html'">Anmelden</button>
+    <!-- Column 3: Icons -->
+    <div class="icons-container">
+        <a href="favorites.html" class="icon favorite">
+            <div class="icon-circle">♡</div>
+            <span class="icon-label">Favorite</span>
+        </a>
+        <a href="login.html" class="icon login">
+            <div class="icon-circle">&#128105;</div>
+            <span class="icon-label">Login</span>
+        </a>
     </div>
-    
 </header>
-    
 </body>
 </html>
