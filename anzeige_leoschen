@@ -1,0 +1,42 @@
+<?php
+header('Content-Type: application/json');
+
+// Подключение к базе данных
+$host = "localhost";
+$username = "root";
+$password = "vovaMySQL707";
+$database = "immobilien_db";
+$conn = new mysqli($host, $username, $password, $database);
+
+if ($conn->connect_error) {
+    echo json_encode(["success" => false, "message" => "DB-Verbindungsfehler: " . $conn->connect_error]);
+    exit;
+}
+
+// Получение данных запроса
+$input = json_decode(file_get_contents("php://input"), true);
+
+// Проверка действия
+if (isset($input['action']) && $input['action'] === "delete" && isset($input['id'])) {
+    $id = intval($input['id']);
+
+    // Удаление записи из таблицы
+    $stmt = $conn->prepare("DELETE FROM Wohnungen WHERE WohnungId = ?");
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true, "message" => "Anzeige erfolgreich gelöscht."]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Fehler beim Löschen der Anzeige: " . $stmt->error]);
+    }
+
+    $stmt->close();
+    $conn->close();
+    exit;
+}
+
+// Если запрос некорректный
+echo json_encode(["success" => false, "message" => "Ungültige Anfrage."]);
+$conn->close();
+exit;
+?>

@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>${anzeige.Beschreibung}</p>
                     <p>${anzeige.Stadt}, ${anzeige.Postleitzahl}</p>
                     <button onclick="bearbeiten(${anzeige.WohnungId})">Bearbeiten</button>
+                    <button onclick="loeschen(${anzeige.WohnungId})">Löschen</button
                 `;
                 anzeigeContainer.appendChild(div);
             });
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Neue Anzeige hinzufügen
     document.getElementById("neue-anzeige").addEventListener("click", () => {
         formContainer.classList.remove("hidden");
+       // form.reset();
+       // document.getElementById("wohnungId").value = "";
     });
 
     // Formular abschicken
@@ -36,9 +39,9 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();  
 
    
-    const formData1 = new FormData(form); // Создаем FormData из формы
-    console.log("Form Data:", formData1);  // Логируем собранные данные
-
+    const formData1 = new FormData(form); // create FormData from form
+    console.log("Form Data:", formData1);  // Protokollierung der FormData
+    
     fetch("hizufugen_bearbeiten.php", {
         method: "POST",
         body: formData1, // Übergeben der Daten im FormData-Format 
@@ -57,31 +60,7 @@ form.addEventListener("submit", (e) => {
         console.error("Error:", error); // Protokollierung der Fehler
     });
 });
-/*
-form1.addEventListener("submit", (e) => {
-    e.preventDefault();
 
-    const formData = new FormData(form1); // Создаем FormData из формы
-
-    fetch("bild_bearbeiten.php", {
-        method: "POST",
-        body: formData, // Передаем данные в формате FormData
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.text().then(text => { throw new Error(text) });
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Server Response:", data); // Логируем ответ сервера
-        location.reload(); // Перезагружаем страницу
-    })
-    .catch(error => {
-        console.error("Error:", error); // Логируем ошибку
-    });
-});
-*/
 
 
 
@@ -96,7 +75,7 @@ function bearbeiten(id) {
     fetch(`Meine_anzeige.php?id=${id}`)
     .then(response => response.json())
     .then(anzeige => {
-        console.log("Полученные данные:", anzeige);
+        console.log("Datenempfang:", anzeige);
         Object.keys(anzeige).forEach(key => {
             const input = document.getElementById(key);
             if (key === "BildLink") {
@@ -106,7 +85,44 @@ function bearbeiten(id) {
         document.getElementById("anzeige-form-container").classList.remove("hidden");
     })
     .catch(error => {
-        console.error("Ошибка при получении данных:", error);
+        console.error("Fehler beim Datenempfang:", error);
     });
 
+}
+
+function loeschen(id) {
+    if (confirm("Möchten Sie die Anzeige wirklich löschen?")) {
+        fetch(`anzeige_leoschen.php`, {
+            method: "POST", // benutzen wir die POST-Methode
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "delete", // Aktion: Löschen
+                id: id
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Server Response:", data);
+            if (data.success) {
+                // Löschen der  Anzeige aus dem DOM (Document Object Model) 
+                const deletedElement = document.querySelector(`[onclick="loeschen(${id})"]`).closest(".anzeige");
+                if (deletedElement) {
+                    deletedElement.remove();
+                }
+            } else {
+                alert("Die Anzeige konnte nicht gelöscht werden.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Ein Fehler ist aufgetreten. Die Anzeige wurde nicht gelöscht.");
+        });
+    }
 }

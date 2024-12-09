@@ -18,7 +18,7 @@ $nutzerId = $_SESSION['user_id']; // Session für eingeloggten Nutzer
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Проверяем, запрошено ли одно объявление
+    // prüfen ob id vorhanden ist
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
         $sql = "SELECT wohnungen.*, bilder.BildLink 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         header('Content-Type: application/json');
         echo json_encode($anzeige);
     } else {
-        // Получение всех объявлений
+        // alle anzeigen
         $sql = "SELECT wohnungen.*, bilder.BildLink 
                 FROM wohnungen 
                 LEFT JOIN bilder ON bilder.WohnungId = wohnungen.WohnungId 

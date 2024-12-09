@@ -8,20 +8,20 @@ $database = "immobilien_db";
 header('Content-Type: application/json; charset=utf-8');
 session_start();
 
-// Подключение к базе данных
+// zu Datenbank verbinden
 $conn = new mysqli($host, $username, $password, $database);
 if ($conn->connect_error) {
     die(json_encode(["success" => false, "message" => "DB-Verbindungsfehler: " . $conn->connect_error]));
 }
 
-// Проверка авторизации пользователя
+// prüfen ob id vorhanden ist
 $nutzerId = $_SESSION['user_id'] ?? null;
 if (!$nutzerId) {
     echo json_encode(["success" => false, "message" => "Der Benutzer ist nicht autorisiert"]);
     exit;
 }
 
-// Обработка POST-запроса
+// bearbeiten post
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $daten = $_POST;
         $BildLink = null;
 
-        // Обработка файла
+        // die Datei hochladen
         if (isset($_FILES['file-input']) && $_FILES['file-input']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'Image/';
             if (!is_dir($uploadDir)) {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $conn->begin_transaction();
 
-        // Обновление существующей записи
+        // erneuern tabelle
         if (isset($daten['WohnungId']) && !empty($daten['WohnungId'])) {
             $sql = "UPDATE Wohnungen SET Stadt = ?, Postleitzahl = ?, Adresse = ?, Zimmerzahl = ?, Wohnflaeche = ?, Etage = ?, Kaltmiete = ?, Nebenkosten = ?, Kaution = ?, Titel = ?, Beschreibung = ?, Haustiere = ?, Baujahr = ? WHERE WohnungId = ?";
             $stmt = $conn->prepare($sql);
@@ -84,17 +84,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         } 
-        // Добавление новой записи
+        // neue Zeile ins tabele hinzufügen
         else {
-            $sql = "INSERT INTO Wohnungen (Stadt, Postleitzahl, Adresse, Zimmerzahl, Wohnflaeche, Etage, Kaltmiete, Nebenkosten, Kaution, Titel, Beschreibung, Haustiere, Baujahr, NutzerId, Wohnungstype) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO Wohnungen (Stadt, Postleitzahl, Adresse, Zimmerzahl, Wohnflaeche, Etage, Kaltmiete, Nebenkosten, Kaution, Titel, Beschreibung, Haustiere, Baujahr, NutzerId, Wohnungstype) VALUES (?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param(
                 "sisiiiiiissiiii",
+               // "sisiiiiiissiiii",
                 $daten['Stadt'],
                 $daten['Postleitzahl'],
                 $daten['Adresse'],
                 $daten['Zimmerzahl'],
-                $daten['Wohnflaeche'],
+               $daten['Wohnflaeche'],
                 $daten['Etage'],
                 $daten['Kaltmiete'],
                 $daten['Nebenkosten'],
@@ -105,9 +106,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $daten['Baujahr'],
                 $nutzerId,
                 $daten['Wohnungstype']
-                
-            );
+            
 
+            );
+          
+           
             if (!$stmt->execute()) {
                 throw new Exception("Fehler beim Einfügen der Wohnungen: " . $stmt->error);
             }
@@ -122,12 +125,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     throw new Exception("Fehler beim Einfügen der Bilder: " . $stmt->error);
                 }
             }
-      }
+        }
 
         $conn->commit();
         echo json_encode(["success" => true, "message" => "Daten erfolgreich gespeichert"]);
-    } catch (Exception $e) {
+        } catch (Exception $e) {
         $conn->rollback();
         echo json_encode(["success" => false, "error" => $e->getMessage()]);
     }
+
+
+
 }
+
+
