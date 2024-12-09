@@ -5,7 +5,7 @@
 }
 
 :root {
-    --img-width: 500px;
+    --img-width: 700px;
     --img-height:400px;
     --btn-border-radius:8%;
     --max-min-width:70px;
@@ -204,7 +204,7 @@ img{
 }
 
 .info-icon {
-    color: red;     
+    /*color: orange;  */   
     }
 .info-icon path{
     fill:currentColor;
@@ -213,6 +213,12 @@ img{
     font-weight: bold;
 
 }
+.icon-submit-btn{
+    border:none;
+
+}
+
+
 /*-------------------Grid stracture of info cards--------------------------------*/
 .appartment-info{
     display:grid;
