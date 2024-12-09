@@ -16,7 +16,7 @@ main {
     justify-content: center;
     flex-direction: column; /* Stack elements vertically */
     padding: 0; /* Remove any default padding */
-    margin: 0; /* Remove any default margin */
+    margin: 20px 0; /* Remove any default margin */
 }
 
 .rectangle {
@@ -226,10 +226,34 @@ h1, h2, h3 {
 .feature {
     text-align: center;
     font-size: 18px;
+    display: flex;
+    align-items: center; /* Выравнивание элементов по вертикали */
+    gap: 10px; /* Промежуток между иконкой и текстом */
+   
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+}
+.svg-feature {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 5px;
+}
+.svg-adresse {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 5px;
 }
 
 .address-section {
     margin: 20px 0;
+    height: 2.5rem;
+    align-items: center;
+    text-decoration: underline;
+    cursor: pointer;
+    border-style: hidden;
 }
 
 .description-section h3 {
@@ -295,7 +319,6 @@ h1, h2, h3 {
     display: flex;
     justify-content: space-between; 
     width: 90%;
-   
-    margin: 20px auto;
+    margin: 10px auto;
     flex-direction: row;
 } 

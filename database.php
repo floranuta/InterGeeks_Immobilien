@@ -39,7 +39,8 @@ function isFavorite($conn, $user_id, $wohnungId){
 }
 function getBeschreibung($conn, $wohnungId){
     $Beschreibung = [];
-    $query="SELECT * FROM wohnungen WHERE WohnungId = $wohnungId";
+    $query="SELECT wohnungen.*,nutzer.Vorname,nutzer.Nachname,nutzer.Email FROM wohnungen INNER JOIN nutzer
+     ON wohnungen.NutzerId = nutzer.NutzerId WHERE wohnungen.WohnungId = $wohnungId";
     $result = $conn->query($query);
     if($result->num_rows > 0) {
       while($row =$result->fetch_assoc()) {
@@ -50,7 +51,7 @@ function getBeschreibung($conn, $wohnungId){
 }
 function getBilder($conn, $wohnungId){
     $Bilder = [];
-    $query="SELECT * FROM bilder WHERE WohnungId = $wohnungId ORDER BY  Hauptbild desc";
+    $query="SELECT * FROM bilder WHERE WohnungId = $wohnungId  ORDER BY  Hauptbild desc";
     $result = $conn->query($query);
     if($result->num_rows > 0) {
       while($row =$result->fetch_assoc()) {
