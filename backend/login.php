@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $host = 'localhost';
     $db_name = 'immobilien_db';
@@ -18,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $input_password = $_POST['kennwort'];
 
-    
     $query = "SELECT * FROM nutzer WHERE Email = :email";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':email', $email);
@@ -26,22 +24,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-       
+
         if (password_verify($input_password, $user['Kennwort'])) {
-           
             $_SESSION['user_id'] = $user['NutzerId'];
             $_SESSION['name'] = $user['Vorname'] . " " . $user['Nachname'];
             $_SESSION['email'] = $user['Email'];
 
-            header("Location: profile.php");
+            header("Location: test.php");
             exit;
         } else {
-            
-            echo "<p>Ungültiges Passwort. Versuchen Sie es erneut.</p>";
+            echo "<script>
+                    window.onload = function() {
+                        document.getElementById('errorMessage').innerText = 'Ungültiges Passwort. Versuchen Sie es erneut.';
+                        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                        errorModal.show();
+                    };
+                  </script>";
         }
     } else {
-        
-        echo "<p>Ein Benutzer mit dieser E-Mail wurde nicht gefunden.</p>";
+        echo "<script>
+                window.onload = function() {
+                    document.getElementById('errorMessage').innerText = 'Ein Benutzer mit dieser E-Mail wurde nicht gefunden.';
+                    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                    errorModal.show();
+                };
+              </script>";
     }
 }
 ?>
@@ -51,75 +58,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Einloggen</title>
-    <style>
-        /* Пастельные цвета */
-        body {
-            
-            font-family: Arial, sans-serif;
-        }
-
-        .card {
-            background-color: #F0EAD2; /* Пастельный светло-зеленый для карточки */
-            border: 1px solid #ADC178; /* Зеленый бордер */
-        }
-
-        .card-header {
-            background-color: #A98467; /* Пастельный коричневый для шапки */
-            color: #fff; /* Белый цвет текста */
-        }
-
-        .btn-primary {
-            background-color: #A98467; /* Пастельный коричневый для кнопки */
-            border-color: #A98467;
-        }
-
-        .btn-primary:hover {
-            background-color: #6C584C; /* Темный коричневый при наведении */
-            border-color: #6C584C;
-        }
-
-        .form-control {
-            background-color: #F0EAD2; /* Пастельный бежевый фон для полей */
-            border: 1px solid #6C584C; /* Зеленый бордер для полей */
-        }
-
-        label {
-            color: #6C584C; /* Пастельный темно-коричневый для текста меток */
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost/Abschlussprojekt/frontend/login.css">
+    <title>Login</title>
 </head>
+<style>  .container {
+            max-height: 100vh; 
+            overflow-y: auto; 
+        }
+
+        .left-side {
+            height: 100%; 
+        }
+
+        .card-body {
+            padding-bottom: 50px; 
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        } </style>
 <body>
-   <form action="login.php" method="POST">
-    <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h4>Einloggen</h4>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
+<div class="container">
+    <div class="left-side">
+        <div class="card">
+            <div class="card-header text-center">
+                <img src="/Abschlussprojekt/images/Logo2.jpg" alt="Логотип" class="logo">
+                <div>Willkommen zurück!</div>
+            </div>
+            <div class="card-body">
+                <form action="login.php" method="POST">
+                    <div class="form-group">
+                        <label for="email">E-Mail-Adresse</label>
+                        <input type="email" id="email" name="email" class="form-control" required placeholder="Bitte E-Mail-Adresse eingeben">
+                    </div>
+                    <div class="form-group">
+                        <label for="kennwort">Passwort</label>
+                        <input type="password" id="kennwort" name="kennwort" class="form-control" required placeholder="Bitte Passwort eingeben">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mb-3">Anmelden</button><br>
+                </form>
 
-
-        <label for="email">Email:</label>
-        <input type="email"class="form-control" id="email" name="email" required placeholder="Geben Sie Ihren Benutzernamen ein"><br>
-        </div>
-
-        <div class="form-group">
-        <label for="kennwort">Passwort:</label>
-        <input type="password" class="form-control"  id="kennwort" name="kennwort" required placeholder="Geben Sie Ihr Passwort ein"><br>
-        </div>
-        <button type="submit"class="btn btn-primary btn-block">Login</button>
- </form>
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block" onclick="window.location.href='anmeldung.php'">Jetzt kostenfrei registrieren</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="right-side"></div>
 </div>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<!-- Модальное окно для вывода ошибок -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Fehler</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="errorMessage">
+        <!-- Сообщение об ошибке будет вставлено сюда -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Подключение Bootstrap JS для работы с модальными окнами -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
