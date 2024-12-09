@@ -127,6 +127,25 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
             </div>
         </div>
     </div>
+
+    <!-- Modal Structure -->
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="img01">
+    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+    <a class="next" onclick="changeImage(1)">&#10095;</a>
+</div>
+
+<!-- Custom Modal Structure -->
+<div id="customModal">
+    <div class="content">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M22 12a10 10 0 1 1-10-10"></path>
+        </svg>
+        <p>Der Link wurde in der Zwischenablage gespeichert</p>
+    </div>
+</div>
     
 </main>
 <?php include 'footer.php'; ?>
