@@ -45,6 +45,10 @@ CREATE TABLE `favoriten` (
   `WohnungId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO favoriten (NutzerID, WohnungId) VALUES (1, 101), (2, 102);
+INSERT INTO bilder (WohnungId, BildLink) VALUES (101, 'Hause1.jpeg'), (102, 'Hause2.jpeg');
+
+
 -- --------------------------------------------------------
 
 --
