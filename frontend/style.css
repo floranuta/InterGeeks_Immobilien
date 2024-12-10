@@ -1,0 +1,21 @@
+body {
+    background-color: #f0f8f0; /* Светлый пастельный зеленый */
+}
+
+.btn-primary {
+    background-color: #a8d0a2; /* Пастельный зеленый для кнопок */
+    border-color: #8bc0a1; /* Пастельный зеленый для бордера */
+}
+
+.btn-primary:hover {
+    background-color: #82b48c; /* Темнее для hover состояния */
+}
+
+.card {
+    background-color: #f4f1ec; /* Пастельный коричневый */
+    border: 1px solid #dcd0b0; /* Светло-коричневый бордер */
+}
+
+.card-header {
+    background-color: #c9d6b4; /* Более яркий зеленый для шапки карточки */
+}
