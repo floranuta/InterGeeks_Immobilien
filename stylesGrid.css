@@ -1,11 +1,15 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 100px;
+    grid-template-rows: 100px 300px 300px;
+    height: calc(100vh - 50px); /* Учитывается 50px на шапку */
+    grid-auto-flow: column;
 }
 
 .items {
-    background: #A98467;
-    border-radius: 10px;
+    background: #fff;
+    /*border-radius: 10px;*/
 }
 
 .items-hover {
@@ -14,10 +18,35 @@
     transition: .3s;
 }
 
-.items:nth-child(even) {
-    background: #A98467;
+.items:nth-child(1) {
+    background: #ffcc00;
+    font-family: Arial, sans-serif;
+    display: flex;
+    grid-column: 1/-1;
+    align-items: center; /* Вертикальное выравнивание текста */
+    justify-content: center; /* Горизонтальное выравнивание текста */
+    font-size: 18px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
+    color: #333; /* Цвет текста */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Легкая тень для текста */
+    
 }
 
-.items:nth-child(odd) {
-    background: #000000;
+.items:nth-child(2) {
+    background: #fff;
+    grid-column-start: 2;
+    grid-column-end: 1;
+}
+
+
+.css-hu6rtn {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 1rem;
 }
