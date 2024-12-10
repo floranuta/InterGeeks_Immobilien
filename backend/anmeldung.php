@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $host = 'localhost';
     $db_name = 'immobilien_db';
     $username = 'root';
-    $password = '';
+    $password = ''; :
 
     try {
         $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
@@ -22,18 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $kennwort = $_POST['kennwort'];
 
-      // Per E-Mail auf Duplikate prüfen
+    // Per E-Mail auf Duplikate prüfen
     $query = "SELECT * FROM nutzer WHERE Email = :email";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':email', $email);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo "<p style='color:red;'>Ein Benutzer mit dieser E-Mail-Adresse existiert bereits.</p>";
+        echo "<script>
+                window.onload = function() {
+                    document.getElementById('errorMessage').innerText = 'Ein Benutzer mit dieser E-Mail-Adresse existiert bereits.';
+                    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                    errorModal.show();
+                };
+              </script>";
     } else {
         $hashed_password = password_hash($kennwort, PASSWORD_DEFAULT);
-        var_dump($hashed_password);
-
         
         $query = "INSERT INTO nutzer (Vorname, Nachname, Email, Kennwort) 
                   VALUES (:vorname, :nachname, :email, :kennwort)";
@@ -49,123 +53,106 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['name'] = $vorname . " " . $nachname;
             $_SESSION['email'] = $email;
 
-            header("Location: profile.php");
+            header("Location: test.php");
             exit;
         } else {
-            echo "<p>Registrierungsfehler. Bitte versuchen Sie es später erneut.</p>";
+            echo "<script>
+                    window.onload = function() {
+                        document.getElementById('errorMessage').innerText = 'Registrierungsfehler. Bitte versuchen Sie es später erneut.';
+                        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                        errorModal.show();
+                    };
+                  </script>";
         }
     }
 }
 ?>
 
-<!DOCTYPE html> 
-<html lang="de"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Registrierung</title>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost/Abschlussprojekt/frontend/anmeldung.css">
+    <title>Anmelden</title>
     <style>
-        /* Пастельные цвета */
-        body {
-            
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
+       
         .container {
-            margin-top: 50px;
-            padding: 20px;
+            max-height: 100vh; 
+            overflow-y: auto; 
         }
 
-        .row {
-            display: flex;
-            justify-content: center;
+        .left-side {
+            height: 100%; 
         }
 
-        .col-md-6 {
-            width: 50%; /* Для установки карточки на 50% ширины экрана */
+        .card-body {
+            padding-bottom: 50px; 
         }
 
-        .card {
-            background-color: #F0EAD2;  /* Пастельный светло-зеленый для карточки */
-            border: 1px solid #6C584C; /* braun бордер */
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .card-header {
-            background-color: #A98467; /* Пастельный коричневый для шапки */
-            color: #fff;
-            border-radius: 10px 10px 0 0;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .btn-submit {
-            background-color: #6C584C; /* Темный коричневый для кнопки */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            display: inline-block;
-            text-decoration: none;
-            width: 100%;
-        }
-
-        .btn-submit:hover {
-            background-color: #A98467; /* Коричневый при наведении */
-        }
-
-        label {
-            color: #6C584C; /* Темный коричневый для текста меток */
-        }
-
-        input {
-            background-color: #F0EAD2; /* Пастельный бежевый фон для полей */
-            border: 1px solid #6C584C; /* braun бордер */
-            border-radius: 5px;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #6C584C; /* Темный коричневый для заголовка */
+        body, html {
+            height: 100%;
+            margin: 0;
         }
     </style>
-</head> 
-<body> 
+</head>
+<body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Anmelden</h2>
+        <div class="left-side">
+            <div class="card">
+                <div class="card-header">
+                    <img src="/Abschlussprojekt/images/Logo2.jpg" alt="Логотип" class="logo">
+                    <h2>Anmelden</h2>
+                </div>
+                <div class="card-body">
+                    <form action="anmeldung.php" method="POST">
+                        <div class="mb-3">
+                            <label for="vorname" class="form-label">Vorname*</label>
+                            <input type="text" id="vorname" name="vorname" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nachname" class="form-label">Nachname*</label>
+                            <input type="text" id="nachname" name="nachname" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email*</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="kennwort" class="form-label">Passwort*</label>
+                            <input type="password" id="kennwort" name="kennwort" class="form-control" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Registrieren</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-side"></div>
+    </div>
+
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Fehler</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="errorMessage">
                     </div>
-                    <div class="card-body">
-                        <form action="anmeldung.php" method="POST">
-                            <label for="vorname">Vorname*</label>
-                            <input type="text" id="vorname" name="vorname" required><br>
-
-                            <label for="nachname">Nachname*</label>
-                            <input type="text" id="nachname" name="nachname" required><br>
-
-                            <label for="email">Email*</label>
-                            <input type="email" id="email" name="email" required><br>
-
-                            <label for="kennwort">Passwort*</label>
-                            <input type="password" id="kennwort" name="kennwort" required><br>
-
-                            <button type="submit" class="btn-submit">Registrieren</button>
-                        </form>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body> 
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
