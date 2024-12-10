@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<?php include 'header.php'; ?>
+<?php include 'header_test.php'; ?>
 
 <?php
 include 'database.php'; 
@@ -94,7 +94,7 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
             </div>
 
             <!-- Address Section -->
-            <div class="address-section" >
+            <div class="address-section" onclick="openInGoogleMaps()">
                 <h5>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="svg-adresse" data-testid="aviv.CDP.Sections.Location.Address.Icon"><path d="M11.111 21.12C9.154 18.712 4.8 12.877 4.8 9.6a7.2 7.2 0 1 1 14.4 0c0 3.277-4.387 9.112-6.311 11.52a1.133 1.133 0 0 1-1.778 0M12 12c1.324 0 2.4-1.076 2.4-2.4S13.324 7.2 12 7.2a2.4 2.4 0 0 0-2.4 2.4c0 1.324 1.076 2.4 2.4 2.4"></path></svg>
                 Adresse:<?php echo $Beschreibung['Stadt']." ".$Beschreibung['Postleitzahl']." ".$Beschreibung['Adresse']; ?>
@@ -146,8 +146,17 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
         <p>Der Link wurde in der Zwischenablage gespeichert</p>
     </div>
 </div>
-    
+
+<script>
+function openInGoogleMaps() {
+    const address = "<?php echo $Beschreibung['Adresse'] . ', ' . $Beschreibung['Postleitzahl'] . ' ' . $Beschreibung['Stadt']; ?>";
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    window.open(url, '_blank');
+}
+</script>
+
+
 </main>
-<?php include 'footer.php'; ?>
+<?php include 'footer_test.php'; ?>
 </body>
 </html>
