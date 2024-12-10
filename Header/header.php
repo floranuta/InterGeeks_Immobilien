@@ -22,20 +22,22 @@ include 'php/db_verbindung.php'; // include Datenbankverbindung
     <!-- Column 2: Navigation Buttons -->
     <nav class="nav-buttons">
         <a href="home.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About Us</a>
+        <a href="about.html" class="nav-link">Über uns</a>
         <a href="services.html" class="nav-link">Services</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="nav-link">Kontakt</a>
     </nav>
 
     <!-- Column 3: Icons -->
     <div class="icons-container">
         <a href="favorites.html" class="icon favorite">
             <div class="icon-circle">♡</div>
-            <span class="icon-label">Favorite</span>
+            <span class="icon-label">Favoriten</span>
         </a>
         <a href="login.html" class="icon login">
-            <div class="icon-circle">&#128105;</div>
-            <span class="icon-label">Login</span>
+            <div class="icon-circle">
+                <img src="img/log-in.jpg" alt="Login Icon" style="width: 80%; height: 80%; border-radius: 50%;">
+            </div>
+            <span class="icon-label">Anmeldung</span>
         </a>
     </div>
 </header>

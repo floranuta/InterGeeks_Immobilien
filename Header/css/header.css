@@ -101,7 +101,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 30px;
     color: #333333; /* Dark grey */
     transition: background-color 0.3s, color 0.3s;
 }
