@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/footer.css">
+
 </head>
 <body>
 <footer class="footer">
     <div class="footer-column social-media">
-        <h3>Follow Us</h3>
+        <h3>Folgen uns</h3>
         <ul>
             <li><a href="https://www.facebook.com/">Facebook</a></li>
             <li><a href="https://x.com/">Twitter</a></li>
@@ -18,27 +19,27 @@
     </div>
     
     <div class="footer-column quick-links">
-        <h3>Quick Links</h3>
+        <h3>Direktlinks</h3>
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">Kontakt</a></li>
             <li><a href="#">Services</a></li>
         </ul>
     </div>
     
     <div class="footer-column data-protection">
-        <h3>Legal</h3>
+        <h3>Rechtliches</h3>
         <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms and Conditions</a></li>
-            <li><a href="#">Cookies</a></li>
+            <li><a href="html/privacy_policy.html" >Datenschutz</a></li>
+            <li><a href="html/terms.html">Geschäftsbedingungen</a></li>
+            <li><a href="html/cookies.html">Cookies</a></li>
         </ul>
     </div>
     
     <div class="footer-column about-us">
-        <h3>About Us</h3>
-        <p>Learn more about our company and mission.</p>
-        <a href="#">Read More</a>
+        <h3>Über uns</h3>
+        <p>Erfahren Sie mehr über unser Unternehmen und unsere Mission.</p>
+        <a href="html/read_more.html">Mehr lesen</a>
     </div>
 </footer>
 
