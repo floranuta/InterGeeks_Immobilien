@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['name'] = $user['Vorname'] . " " . $user['Nachname'];
             $_SESSION['email'] = $user['Email'];
 
-            header("Location: test.php");
+            header("Location: Profil.php");
             exit;
         } else {
             echo "<script>
@@ -62,23 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="http://localhost/Abschlussprojekt/frontend/login.css">
     <title>Login</title>
 </head>
-<style>  .container {
-            max-height: 100vh; 
-            overflow-y: auto; 
-        }
-
-        .left-side {
-            height: 100%; 
-        }
-
-        .card-body {
-            padding-bottom: 50px; 
-        }
-
-        body, html {
-            height: 100%;
-            margin: 0;
-        } </style>
 <body>
 <div class="container">
     <div class="left-side">
@@ -109,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="right-side"></div>
 </div>
 
-<!-- Модальное окно для вывода ошибок -->
+
 <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -118,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="errorMessage">
-        <!-- Сообщение об ошибке будет вставлено сюда -->
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
@@ -127,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </div>
 
-<!-- Подключение Bootstrap JS для работы с модальными окнами -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
