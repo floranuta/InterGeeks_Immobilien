@@ -13,35 +13,35 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Получение данных запроса
+// Abrufen von Anfragedaten
 $input = json_decode(file_get_contents("php://input"), true);
 
-// Проверка действия
+// prüfen actijon und id
 if (isset($input['action']) && $input['action'] === "delete" && isset($input['id'])) {
     $id = intval($input['id']);
 
-    // Начинаем транзакцию для обеспечения целостности данных
+    // starten der Transaktion
     $conn->begin_transaction();
     try {
-        // Удаление записей из таблицы bilder
+        // Löschen von Bildern aus der Tabelle bilder
         $stmtBilder = $conn->prepare("DELETE FROM bilder WHERE WohnungId = ?");
         $stmtBilder->bind_param("i", $id);
         if (!$stmtBilder->execute()) {
             throw new Exception("Fehler beim Löschen aus der Tabelle 'bilder': " . $stmtBilder->error);
         }
 
-        // Удаление записи из таблицы Wohnungen
+        // löschen von Anzeigen aus der Tabelle wohnungen
         $stmtWohnungen = $conn->prepare("DELETE FROM Wohnungen WHERE WohnungId = ?");
         $stmtWohnungen->bind_param("i", $id);
         if (!$stmtWohnungen->execute()) {
             throw new Exception("Fehler beim Löschen aus der Tabelle 'Wohnungen': " . $stmtWohnungen->error);
         }
 
-        // Если все запросы успешны, подтверждаем транзакцию
+        // wenn alles erfolgreich war, dann commit
         $conn->commit();
         echo json_encode(["success" => true, "message" => "Anzeige und zugehörige Bilder erfolgreich gelöscht."]);
     } catch (Exception $e) {
-        // В случае ошибки откатываем изменения
+        // im Fehlerfall rollback
         $conn->rollback();
         echo json_encode(["success" => false, "message" => $e->getMessage()]);
     } finally {
@@ -53,7 +53,7 @@ if (isset($input['action']) && $input['action'] === "delete" && isset($input['id
     exit;
 }
 
-// Если запрос некорректный
+// wenn die Anfrage nicht korrekt ist
 echo json_encode(["success" => false, "message" => "Ungültige Anfrage."]);
 $conn->close();
 exit;

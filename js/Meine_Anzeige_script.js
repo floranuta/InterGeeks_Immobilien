@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formContainer = document.getElementById("anzeige-form-container");
     const form = document.getElementById("anzeige-form");
     const abbrechenButton = document.getElementById("abbrechen");
-    const form1 = document.getElementById("file-form");
+   
 
     // Anzeigen laden
     fetch("Meine_anzeige.php")

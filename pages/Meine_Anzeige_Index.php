@@ -5,9 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="Meine_Anzeige_styles.css"> 
+ <link rel="stylesheet" href="../styles/Meine_Anzeige_styles.css"> 
     <title>Meine Anzeigen</title>
 </head>
+<header>
+<?php
+include("../includes/header.php");
+include("../includes/footer.php");
+?>
+
+</header>
 <body>
     <div id="anzeigen-container"></div>
     <button id="neue-anzeige">Neue Anzeige hinzufügen</button>
@@ -41,6 +48,6 @@
            
         </form>-->
     </div>
-    <script src="Meine_Anzeige_script.js"></script>
+    <script src="../js/Meine_Anzeige_script.js"></script>
 </body>
 </html>
