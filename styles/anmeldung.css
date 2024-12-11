@@ -47,7 +47,7 @@ body {
     text-align: center;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .form-control {
@@ -97,7 +97,7 @@ body {
 
 .right-side {
     width: 60%;
-    background-image: url('/Abschlussprojekt/images/anmeldung.jpg');
+    background-image: url('/Abschlussprojekt/img/anmeldung.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -115,7 +115,7 @@ body {
 }
 
 .logo {
-    max-width: 250px; 
+    max-width: 200px; 
     height: auto; 
-    margin-bottom: 35px; 
+    margin-bottom: 50px; 
 }

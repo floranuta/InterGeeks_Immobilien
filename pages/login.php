@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
         if (password_verify($input_password, $user['Kennwort'])) {
             $_SESSION['user_id'] = $user['NutzerId'];
             $_SESSION['name'] = $user['Vorname'] . " " . $user['Nachname'];
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://localhost/Abschlussprojekt/frontend/login.css">
+    <link rel="stylesheet" href="http://localhost/Abschlussprojekt/styles/login.css">
     <title>Login</title>
 </head>
 <body>
@@ -67,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="left-side">
         <div class="card">
             <div class="card-header text-center">
-                <img src="/Abschlussprojekt/images/Logo2.jpg" alt="Логотип" class="logo">
+                <img src="/Abschlussprojekt/img/Logo2.jpg" alt="Логотип" class="logo">
                 <div>Willkommen zurück!</div>
             </div>
             <div class="card-body">
