@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beschreibung</title>
-    <link rel="stylesheet" href="beschreibung.css">
+    <link rel="stylesheet" href="../styles/beschreibung.css">
 </head>
 <body>
 
-<?php include 'header_test.php'; ?>
+<?php include '../includes/header.php'; ?>
 
 <?php
-include 'database.php'; 
+include '../pages/database.php'; 
 $conn = ConnectDB();
 //$user_id = $_SESSION['user_id'];
 $user_id = 1;
@@ -32,7 +32,7 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
     const NutzerId = <?php echo json_encode($user_id); ?>;
     const WohnungId = <?php echo json_encode($wohnungId); ?>;
 </script>
-<script src="beschreibung.js"></script>
+<script src="../js/beschreibung.js"></script>
 <main>
     <div class="rectangle">
         <div class="large">
@@ -47,13 +47,13 @@ $Bilder = getBilder($conn, $wohnungId); //array of images
     </div>
     <div class="button-container">
         <button type="button" aria-label="Copy link" class="btn1" onclick="copyLink()">
-            <img src="img/clipboard.svg" alt="Copy link icon" class="svg-icon">
+            <img src="../img/clipboard.svg" alt="Copy link icon" class="svg-icon">
         </button>
         <button type="button" aria-label="Add to Favourites" class="btn2" onclick="anotherAction()">
-            <img id="heart-icon" src="img/heart_unmarked.svg" alt="Another action icon" class="svg-icon">
+            <img id="heart-icon" src="../img/heart_unmarked.svg" alt="Another action icon" class="svg-icon">
         </button>
         <button type="button" aria-label="Print page" class="btn3" onclick="printPage()">
-            <img src="img/print.svg" alt="Print page icon" class="svg-icon">
+            <img src="../img/print.svg" alt="Print page icon" class="svg-icon">
         </button>
     </div>
 <div class="content-wrapper">
@@ -157,6 +157,6 @@ function openInGoogleMaps() {
 
 
 </main>
-<?php include 'footer_test.php'; ?>
+<?php include '../includes/footer.php'; ?>
 </body>
 </html>

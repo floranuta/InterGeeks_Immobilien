@@ -4,15 +4,15 @@ let currentImageIndex = 0;
 document.addEventListener("DOMContentLoaded", function() {
     const heartIcon = document.getElementById("heart-icon");
     if (isFavorite) {
-        heartIcon.src = "img/heart_marked.svg"; // Change to the marked heart icon
+        heartIcon.src = "../img/heart_marked.svg"; // Change to the marked heart icon
     } else {
-        heartIcon.src = "img/heart_unmarked.svg"; // Change to the unmarked heart icon
+        heartIcon.src = "../img/heart_unmarked.svg"; // Change to the unmarked heart icon
     }
     //heartIcon.addEventListener("click", anotherAction);
 });
 function addFavorite() {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "add_favorite.php", true);
+    xhr.open("POST", "../pages/add_favorite.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
@@ -22,7 +22,7 @@ function addFavorite() {
                     response = JSON.parse(xhr.responseText);
                     console.log(response);
                     if (response.success) {
-                        document.getElementById("heart-icon").src = "img/heart_marked.svg";
+                        document.getElementById("heart-icon").src = "../img/heart_marked.svg";
                         console.log("Favorite added successfully");
                     } else {
                         console.error("Failed to add favorite:", response.error);
@@ -43,7 +43,7 @@ function addFavorite() {
 
 function removeFavorite() {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "delete_favorite.php", true);
+    xhr.open("POST", "../pages/delete_favorite.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
@@ -53,7 +53,7 @@ function removeFavorite() {
                     response = JSON.parse(xhr.responseText);
                     console.log(response);
                     if (response.success) {
-                        document.getElementById("heart-icon").src = "img/heart_unmarked.svg";
+                        document.getElementById("heart-icon").src = "../img/heart_unmarked.svg";
                         console.log("Favorite removed successfully");
                     } else {
                         console.error("Failed to remove favorite:", response.error);
