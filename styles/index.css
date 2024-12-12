@@ -102,6 +102,10 @@ img {
 
 }
 
+.default-img {
+    width: var(--img-width);
+    height: var(--img-height);
+}
 
 .arrow {
     cursor: pointer;

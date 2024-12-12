@@ -33,78 +33,89 @@ scrollUpBtn.addEventListener("click", (e) => {
 })
 
 
-
-
 function manageFavourites(event) {
     event.preventDefault();
     // Holt den Button und die zugehörige Wohnungs-ID aus der HTML-Struktur
     let likeBtn = event.target.closest('.appartment-card').querySelector('.like-btn');
-    let wohnungId = likeBtn.dataset.WohnungId;
-    // Sendet die Wohnungs-ID per POST-Request an den Server
-    fetch("index.php", {
-        method: "POST",
-        // JSON-Daten werden gesendet
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ wohnungId: wohnungId }),
-    })
-    .then(response => {
-        // Wenn der Server erfolgreich antwortet
-        if (response.ok) {
-            // Wechselt die Farbe des Buttons zwischen orange und rot
-            if (likeBtn.style.color === "orange") {
-                console.log(likeBtn.style.color);
-                likeBtn.style.color = "red";
-            } else {
-                likeBtn.style.color = "orange";
+    let nutzer = likeBtn.dataset.nutzer;
+
+    //Weitere Code nur wenn nutzer>0 ausführen(d.h. wenn jemanden angemeldet ist)
+    if (nutzer > 0) {
+
+        //holt die zugehörige Wohnungs-ID
+        let wohnungId = likeBtn.dataset.wohnungid;
+        // Sendet die Wohnungs-ID per POST-Request an den Server
+        fetch("index.php", {
+            method: "POST",
+            // JSON-Daten werden gesendet
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ wohnungId: wohnungId }),
+        })
+            .then(response => {
+                // Wenn der Server erfolgreich antwortet
+                if (response.ok) {
+                    // Wechselt die Farbe des Buttons zwischen orange und rot
+                    if (likeBtn.style.color === "orange") {
+                        likeBtn.style.color = "red";
+                    } else {
+                        likeBtn.style.color = "orange";
+                    }
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+
+            // Fehler protokollieren
+            .catch(error => {
+                console.error('Error:', error);
             }
-        } else {
-            throw new Error('Network response was not ok');
-        }
-    })
-    // Fehler im Catch-Block protokollieren
-        .catch(error => {
-            console.error('Error:', error);
-        }
-        )
+            )
+    }
 }
 function scrollImageStrip(event) {
     event.preventDefault();
-    
+    //Den Context bestimmen(current Wohnungcard)
     let appartmentCard = event.target.closest('.appartment-card');
+    //Anzahl der ausgefürte Scrolls für bestimmte Appartment-Card mithilfe data-scroll  Attribute bekommen
     let countScroll = parseInt(appartmentCard.dataset.scroll);
 
 
     let countScrollHtmlEl = appartmentCard.querySelector('.count-scroll');
     let imgInnerContainer = appartmentCard.querySelector('.img-inner-container');
+
+    //Wie viel Bilder zur diese Card gehören
     let imgQuantity = appartmentCard.querySelectorAll('img').length;
-    //Bestimmt maximal scroll Anzahl
+
+    //Bestimmt maximal scroll Anzahl (in %)
     let maxScrolls = imgQuantity * 100 - 100;
-    console.log("Count scroll: ", countScroll);
-    //Check, ob event auf svg order path passiert ist
+
+
+    //Wenn event auf svg order path von rechte Pfeile passiert ist
+    //und wenn countScroll maximal mögliche Wert nicht erreicht hat
     if ((event.target.classList.contains('arrow-right')
         || event.target.parentElement.classList.contains('arrow-right')) && maxScrolls > countScroll) {
-
         countScroll = 100 + countScroll;
+
+        //Parent element von der Bilder auf CountScroll Wert von default Position rechts bewegen
+        //d.h. auf 100% von current Position
         imgInnerContainer.style.transform = "translate(-" + countScroll + "%)";
-        console.log("Count scroll: ", countScroll);
-        countScrollHtmlEl.innerText = (countScroll / 100) + 1 + "/" + imgQuantity;
-        appartmentCard.dataset.scroll = countScroll.toString();
+        //Wenn event auf svg order path von linke Pfeile passiert ist
     } else if (0 < countScroll && (event.target.classList.contains('arrow-left') || event.target.parentElement.classList.contains('arrow-left'))) {
-        console.log(appartmentCard.dataset.scrollCount + "dataset");
         countScroll = countScroll - 100;
+        //Parent element von der Bilder auf CountScroll Wert von default Position links bewegen
+        //d.h. auf 100% von current Position
         imgInnerContainer.style.transform = "translate(-" + countScroll + "%)";
     }
+
+    //Text, der gescrollte Images zeigt erneuern
     countScrollHtmlEl.innerText = (countScroll / 100) + 1 + "/" + imgQuantity;
+
+    //Data-scroll Attribute für diese Card erneuern
     appartmentCard.dataset.scroll = countScroll.toString();
 
 }
 
 
 
-function toggleDropdown(event) {
-
-    const parentDiv = event.target.parentElement;
-    parentDiv.querySelector(".dropdown-content").classList.toggle("visible");
-}
