@@ -1,42 +1,132 @@
+/* Media query for large screens (≥ 992px): 
+   Sets the column width to 30%, allowing 3 cards in a row */
+   @media (min-width: 992px) {
+    .col-lg-4 {
+        flex: 0 0 30%; 
+        max-width: 30%;
+    }
+}
+
+/* Media query for tablets (≤ 768px): 
+   Sets the column width to 50%, displaying 2 cards per row */
+@media (max-width: 768px) {
+    .row > [class*="col-"] {
+      width: 50%; 
+    }
+}
+
+/* Media query for mobile devices (≤ 576px): 
+   Sets the column width to 100%, displaying 1 card per row */
+@media (max-width: 576px) {
+    .row > [class*="col-"] {
+      width: 100%;
+    }
+}
+
+/* Row container: 
+   - Uses flexbox for layout 
+   - Allows child elements to wrap into new rows
+   - Adds negative margins to counteract padding on child elements 
+   - Centers items horizontally */
+.row {
+    display: flex;
+    flex-wrap: wrap; 
+    margin-right: -15px;
+    margin-left: -15px;
+    justify-content: center;
+}
+
+/* Fluid container: 
+   - Limits the container's maximum width to 1600px
+   - Centers the container horizontally
+   - Adds padding to the sides for spacing */
+.container-fluid {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Property card container: 
+   - Adds a border, rounded corners, and a subtle shadow 
+   - Prevents content overflow
+   - Sets a clean white background and centers the content */
 .property-card {
     border: 1px solid #ddd;
     border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    background: #fff;
+    padding: 15px;
+    text-align: center;
 }
 
-/* Position arrows only within their gallery */
+/* Property card image: 
+   - Limits the image height to 400px
+   - Maintains the image's aspect ratio and crops if needed */
+.property-card img {
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Swiper container: 
+   - Ensures the slider content fits within the container 
+   - Prevents overflow and allows for positioning of navigation controls */
 .swiper-container {
-    position: relative; /* This is necessary for arrows to be positioned within the container */
+    width: 100%;
+    overflow: hidden; 
+    position: relative; 
 }
 
+/* Swiper wrapper: 
+   - Enables horizontal scrolling with a smooth transition */
+.swiper-wrapper {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Swiper slide: 
+   - Ensures each slide takes up full width and centers its content */
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Swiper navigation buttons: 
+   - Positions the "next" and "previous" buttons vertically centered
+   - Ensures the buttons are above other content (z-index) */
 .swiper-button-next,
 .swiper-button-prev {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    color: #000; 
 }
 
-/* Arrows are unique to each slider */
-.swiper-button-next {
-    right: 10px;
-}
-.swiper-button-prev {
-    left: 10px;
-}
+/* Positions the "next" navigation button */
+.swiper-button-next { right: 10px; }
 
+/* Positions the "previous" navigation button */
+.swiper-button-prev { left: 10px; }
+
+/* Swiper slide images: 
+   - Ensures the image fills the slide container while maintaining its proportions */
 .swiper-slide img {
     width: 100%;
     height: auto;
-    object-fit: cover; /* Можно поменять на 'contain', 'fill' или 'none' в зависимости от потребностей */
+    object-fit: cover;
 }
 
+/* Property information container: Adds padding for spacing */
 .property-info {
     padding: 15px;
 }
 
+/* Property title: 
+   - Makes the title bold and slightly larger 
+   - Adds bottom margin and pointer cursor for interactivity */
 .property-title {
     font-weight: bold;
     font-size: 18px;
@@ -44,25 +134,34 @@
     cursor: pointer;
 }
 
+/* Property details section: 
+   - Displays property details inline with spacing */
 .property-details span {
     display: inline-block;
     margin-right: 15px;
 }
 
+/* Swiper navigation button color */
 .swiper-button-next, .swiper-button-prev {
     color: #000;
 }
 
+/* Active pagination bullet: Changes color for the currently active bullet */
 .swiper-pagination-bullet-active {
     background: #007bff;
 }
 
+/* Favorite heart container: 
+   - Sets up relative positioning for tooltip display */
 .favorite-heart-container {
     position: relative;
     display: inline-block;
     margin-bottom: 10px;
 }
 
+/* Tooltip: 
+   - Hidden by default and shown on hover
+   - Positions the tooltip above the heart icon with yellow background */
 .tooltip {
     display: none;
     position: absolute;
@@ -80,28 +179,47 @@
     transition: opacity 0.2s;
 }
 
+/* Displays the tooltip on hover with smooth opacity transition */
 .favorite-heart-container:hover .tooltip {
     display: block;
     opacity: 1;
 }
 
+/* Favorite heart icon: 
+   - Customizes color and size 
+   - Adds pointer cursor for interactivity */
 .favorite-heart {
     color: #1d1d1f !important;
     font-size: 20px;
     cursor: pointer;
 }
 
+/* Location icon: 
+   - Adds blue color and spacing to the location marker */
 .location-icon {
-    color: #007bff; /* Blue color */
+    color: #007bff; 
     margin-right: 5px;
 }
 
+/* Address link: 
+   - Customizes link color and removes underline */
 .address-link {
     color: #007bff;
     text-decoration: none;
 }
 
+/* Hover state for address link: 
+   - Adds underline and darker blue color */
 .address-link:hover {
     text-decoration: underline;
     color: #0056b3;
+}
+
+/* Favorites title: 
+   - Applies gold color, bold font, and centers the text with top spacing */
+.favorites-title {
+    color: #FFD700; 
+    font-weight: bold; 
+    margin-top: 30px;
+    text-align: center;
 }
